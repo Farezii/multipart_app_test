@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # basic imports
     'rest_framework',
+    'image_app',
     # django cleanup of files after deletion
     'django_cleanup.apps.CleanupConfig',
 ]
