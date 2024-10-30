@@ -30,6 +30,9 @@ PORT=environ.get('PORT', 8080)
 DEBUG = True
 
 ALLOWED_HOSTS = [HOST]
+if(DEBUG):
+    ALLOWED_HOSTS.append('localhost')
+    ALLOWED_HOSTS.append('127.0.0.1')
 
 
 # Application definition
