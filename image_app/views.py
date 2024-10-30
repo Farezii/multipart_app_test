@@ -11,8 +11,14 @@ class ImageUploadViewSet(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
         images = request.FILES.getlist('images')
-        ids = request.data.getlist('ids')
-        timestamps = request.data.getlist('timestamps')
+        ids_data = request.data.get('ids')
+        ids = ids_data.split(',')
+        timestamps_data = request.data.get('timestamps')
+        timestamps = timestamps_data.split(',')
+
+        print(str(len(images)) + " images received")
+        print(str(len(ids)) + " ids received")
+        print(str(len(timestamps)) + " timestamps received")
 
         if not (len(images) == len(ids) == len(timestamps)):
             return Response({"error": "Mismatched lengths of images, ids, and timestamps"}, status=status.HTTP_400_BAD_REQUEST)
@@ -21,7 +27,7 @@ class ImageUploadViewSet(viewsets.ViewSet):
             image_instance = Image(
                 image_path=image,
                 given_id=given_id,
-                timestamp=timestamp
+                created_at=timestamp
             )
             image_instance.save()
 
